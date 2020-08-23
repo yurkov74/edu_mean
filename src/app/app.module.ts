@@ -5,7 +5,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 //material
 import {MatButtonModule} from '@angular/material/button';
-import {MatExpansionModule} from '@angular/material/expansion'
+import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatToolbarModule} from '@angular/material/toolbar';
 // app modules
@@ -29,7 +31,7 @@ import { PostListComponent } from './posts/post-list/post-list.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    MatButtonModule, MatExpansionModule, MatProgressSpinnerModule, MatToolbarModule,
+    MatButtonModule, MatCardModule, MatInputModule, MatExpansionModule, MatProgressSpinnerModule, MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
