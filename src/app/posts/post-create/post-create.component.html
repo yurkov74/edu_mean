@@ -1,7 +1,6 @@
-<p>post-create works!</p>
 <mat-card>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
+    <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">This place is loaded
         <mat-form-field>
             <input
                 matInput

@@ -33,11 +33,12 @@ export class PostCreateComponent implements OnInit {
           this.isLoading = false;
           this.post = {id: postData._id, title: postData.title, content: postData.content};
         });
-      } else {
+      } else {console.log('We are here');
         this.mode = "create";
         this.postId = null;
       }
     });
+    console.log('Control point: '+ this.mode);
   }
 
   onSavePost(form: NgForm) {
