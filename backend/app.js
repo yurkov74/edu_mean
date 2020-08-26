@@ -1,3 +1,4 @@
+const path = require ("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -24,6 +25,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/images",express.static(path.join("backend/images"))); //allows access to the image folder in the backend as a static folder in the frontend
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
