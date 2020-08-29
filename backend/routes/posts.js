@@ -72,13 +72,22 @@ router.get("", (req, res, next) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
   let postQuery = Post.find();
+  let fetchedPosts = [];
   if (pageSize && currentPage) {
     postQuery = postQuery.skip((currentPage-1)*pageSize).limit(pageSize);
   };
-  postQuery.then(documents => {
+  postQuery
+  .then(documents => {
+    this.fetchedPosts = documents; //console.log('Posts recieved from db: ', this.fetchedPosts.length);
+    return Post.estimatedDocumentCount();
+  })
+  .then(count => {
+    console.log('Posts recieved from db: ', this.fetchedPosts.length);
+    console.log('Total posts in db: ', count);
     res.status(200).json({
       message: "Posts fetched successfully!",
-      posts: documents
+      posts: this.fetchedPosts,
+      maxPosts: count
     });
   });
 });
