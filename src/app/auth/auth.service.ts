@@ -8,6 +8,7 @@ import { AuthData } from './auth-data.model';
     providedIn: 'root'
 })
 export class AuthService {
+    private isAuthenticated = false;
     private token: string;
     private authStausListener = new Subject<boolean>();
     
@@ -16,7 +17,7 @@ export class AuthService {
     ) {}
 
     getToken() { return this.token; }
-
+    getIsAuth() { return this.isAuthenticated; }
     getAuthStausListener() { return this.authStausListener.asObservable(); }
     
     createUser(email: string, password: string) {
@@ -33,7 +34,10 @@ export class AuthService {
         .subscribe(response => {
             // console.log(response);
             this.token = response.token;
-            this.authStausListener.next(true);
+            if (this.token) {
+                this.isAuthenticated = true;
+                this.authStausListener.next(true);
+            };
         });
     }
 }
