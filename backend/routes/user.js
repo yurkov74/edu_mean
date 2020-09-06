@@ -45,13 +45,15 @@ router.post("/login",(req, res, next) => {
         if (!result) return res.status(401).json({
             message: 'Authentication failed: wrong password!'
         });
+        const tokenTtlInHours = 1;
         const token = jwt.sign({
             email: this.fetchedUser.email, userId: this.fetchedUser._id },
             "a_long_secret_string_for_token_validation",
-            { expiresIn: "1h"}
+            { expiresIn: tokenTtlInHours + "h"}
         );
         res.status(200).json({
-            token: token
+            token: token,
+            expiresIn: tokenTtlInHours * 60 * 60
         });
     })
     .catch(err => {
