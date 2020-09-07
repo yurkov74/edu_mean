@@ -69,10 +69,13 @@ router.put(
       _id: req.body.id,
       title: req.body.title,
       content: req.body.content,
-      imagePath: imagePath
+      imagePath: imagePath,
+      creator: req.userData.userId
     });
-    Post.updateOne({ _id: req.params.id }, post).then(result => {
-      res.status(200).json({ message: "Update successful!" });
+    Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post).then(result => {
+      if(result.nModified > 0) {
+        res.status(200).json({ message: "Update successful!" });
+      } else { res.status(401).json({ message: "You're not authorized to edit this post!" }); };
     });
   }
 );
@@ -115,9 +118,11 @@ router.delete(
   "/:id",
   checkAuth,
   (req, res, next) => {
-    Post.deleteOne({ _id: req.params.id }).then(result => {
-      console.log(result);
-      res.status(200).json({ message: "Post deleted!" });
+    Post.deleteOne({ _id: req.params.id, creator: req.userData.userId }).then(result => {
+      // console.log('Delete result', result);
+      if(result.deletedCount > 0) {
+        res.status(200).json({ message: "Post deleted!" });
+      } else { res.status(401).json({ message: "You're not authorized to delete this post!" }); };
     });
   }
 );
