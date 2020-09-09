@@ -31,17 +31,17 @@ router.post("/signup", (req, res, next) => {
     });
 });
 
-router.post("/login",(req, res, next) => {
+router.post("/login",(req, res, next) => { //console.log('req.body:', req.body);
     let fetchedUser;
     User.findOne({ email: req.body.email})
-    .then(user => {
+    .then(user => {console.log('user from db:', user);
         if (!user) return res.status(401).json({
             message: 'Authentication failed: no user with such email!'
         });
-        this.fetchedUser = user;
+        this.fetchedUser = user; console.log('fetchedUser:', this.fetchedUser);
         return bcrypt.compare(req.body.password, user.password);
     })
-    .then(result => {
+    .then(result => {//console.log('password is correct:', result);
         if (!result) return res.status(401).json({
             message: 'Authentication failed: wrong password!'
         });
@@ -53,10 +53,11 @@ router.post("/login",(req, res, next) => {
         );
         res.status(200).json({
             token: token,
-            expiresIn: tokenTtlInHours * 60 * 60
+            expiresIn: tokenTtlInHours * 60 * 60,
+            userId: this.fetchedUser._id
         });
     })
-    .catch(err => {
+    .catch(err => { //console.log(err.message); onsole.log(err);
         return res.status(401).json({
             message: 'Authentication failed!',
             error: err
