@@ -6,6 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 //material
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator'
@@ -16,8 +17,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 // app services
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { ErrorInterceptor } from './error-interceptor';
 // app components
 import { AppComponent } from './app.component';
+import { ErrorDialogComponent } from './error-dialog.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './auth/login/login.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
@@ -27,6 +30,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 @NgModule({
   declarations: [
     AppComponent,
+    ErrorDialogComponent,
     HeaderComponent,
     LoginComponent,
     PostCreateComponent,
@@ -39,9 +43,14 @@ import { SignupComponent } from './auth/signup/signup.component';
     AppRoutingModule,
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
-    MatButtonModule, MatCardModule, MatInputModule, MatExpansionModule, MatPaginatorModule, MatProgressSpinnerModule, MatToolbarModule,
+    MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatExpansionModule,
+    MatPaginatorModule, MatProgressSpinnerModule, MatToolbarModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorDialogComponent]
 })
 export class AppModule { }
