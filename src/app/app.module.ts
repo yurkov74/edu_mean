@@ -3,17 +3,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-//material
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatInputModule} from '@angular/material/input';
-import {MatPaginatorModule} from '@angular/material/paginator'
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatToolbarModule} from '@angular/material/toolbar';
 
 // app modules
+import { AngularMaterialModule } from './angular-material.module';
 import { AppRoutingModule } from './app-routing.module';
 // app services
 import { AuthInterceptor } from './auth/auth-interceptor';
@@ -38,13 +30,12 @@ import { SignupComponent } from './auth/signup/signup.component';
     SignupComponent
   ],
   imports: [
+    AngularMaterialModule,
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
-    MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatExpansionModule,
-    MatPaginatorModule, MatProgressSpinnerModule, MatToolbarModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
