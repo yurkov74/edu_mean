@@ -45,9 +45,11 @@ exports.updatePost = (req, res, next) => {
       imagePath: imagePath,
       creator: req.userData.userId
     });
-    Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post).then(result => {
+    Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post).then(result => { console.log(result);
       if(result.nModified > 0) {
         res.status(200).json({ message: "Post updated successfully!" });
+      } else if(result.n > 0) {
+        res.status(200).json({ message: "No updates in the post!" });
       } else { res.status(401).json({ message: "Post update failed: you're not authorized to edit this post!" }); };
     })
     .catch(error => res.status(500).json({
