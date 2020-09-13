@@ -51,7 +51,11 @@ router.post(
           imagePath: createdPost.imagePath
         }
       });
-    });
+    })
+    .catch(error => res.status(500).json({
+      message: "Error saving new post!",
+      error: error
+    }));
   }
 );
 
@@ -74,9 +78,13 @@ router.put(
     });
     Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post).then(result => {
       if(result.nModified > 0) {
-        res.status(200).json({ message: "Update successful!" });
-      } else { res.status(401).json({ message: "You're not authorized to edit this post!" }); };
-    });
+        res.status(200).json({ message: "Post updated successfully!" });
+      } else { res.status(401).json({ message: "Post update failed: you're not authorized to edit this post!" }); };
+    })
+    .catch(error => res.status(500).json({
+      message: "Post update failed!",
+      error: error
+    }));
   }
 );
 
@@ -101,7 +109,11 @@ router.get("", (req, res, next) => {
       posts: this.fetchedPosts,
       maxPosts: count
     });
-  });
+  })
+  .catch(error => res.status(500).json({
+    message: "Error getting posts list from server!",
+    error: error
+  }));
 });
 
 router.get("/:id", (req, res, next) => {
@@ -111,7 +123,11 @@ router.get("/:id", (req, res, next) => {
     } else {
       res.status(404).json({ message: "Post not found!" });
     }
-  });
+  })
+  .catch(error => res.status(500).json({
+    message: "Error getting the post from server!",
+    error: error
+  }));
 });
 
 router.delete(
@@ -123,7 +139,11 @@ router.delete(
       if(result.deletedCount > 0) {
         res.status(200).json({ message: "Post deleted!" });
       } else { res.status(401).json({ message: "You're not authorized to delete this post!" }); };
-    });
+    })
+    .catch(error => res.status(500).json({
+      message: "Error deleting the post!",
+      error: error
+    }));
   }
 );
 
