@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 // app modules
 import { AngularMaterialModule } from '../angular-material.module';
+import { AuthRoutingModule } from './auth-routing.module';
 // app components
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -14,6 +15,7 @@ import { SignupComponent } from './signup/signup.component';
     ],
     imports: [
         AngularMaterialModule,
+        AuthRoutingModule,
         CommonModule,
         FormsModule,
     ]

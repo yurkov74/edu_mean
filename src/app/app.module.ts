@@ -6,7 +6,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 // app modules
 import { AngularMaterialModule } from './angular-material.module';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
 // app services
 import { AuthInterceptor } from './auth/auth-interceptor';
@@ -25,7 +24,6 @@ import { HeaderComponent } from './header/header.component';
   imports: [
     AngularMaterialModule,
     AppRoutingModule,
-    AuthModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
