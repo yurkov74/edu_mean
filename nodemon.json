@@ -1,0 +1,6 @@
+{
+    "env": {
+        "MONGODB_SRV": "localhost:27017/mean",
+        "JWT_KEY": "a_long_secret_string_for_token_validation"
+    }
+}

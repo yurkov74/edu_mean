@@ -14,7 +14,7 @@ const mngConectionOptions = {
 };
 mongoose
   .connect(
-    "mongodb://localhost:27017/mean",
+    "mongodb://" + process.env.MONGODB_SRV,
     mngConectionOptions
   )
   .then(() => {
