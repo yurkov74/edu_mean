@@ -1,6 +1,9 @@
 {
     "env": {
-        "MONGODB_SRV": "localhost:27017/mean",
+        "MONGODB_LOCAL": "localhost:27017/mean",
+        "MONGODB_ATL": "@testdb.aiure.mongodb.net/mean?retryWrites=true&w=majority",
+        "MONGODB_ATL_USR": "appdemon",
+        "MONGODB_ATL_PW": "lYGnj7nhNzA4lz8g",
         "JWT_KEY": "a_long_secret_string_for_token_validation"
     }
 }

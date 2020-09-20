@@ -14,7 +14,12 @@ const mngConectionOptions = {
 };
 mongoose
   .connect(
-    "mongodb://" + process.env.MONGODB_SRV,
+    // "mongodb://" + process.env.MONGODB_LOCAL,
+    "mongodb+srv://" +
+      process.env.MONGODB_ATL_USR +
+      ":" +
+      process.env.MONGODB_ATL_PW +
+      process.env.MONGODB_ATL,
     mngConectionOptions
   )
   .then(() => {
