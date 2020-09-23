@@ -31,8 +31,10 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/images",express.static(path.join("images"))); //allows access to the image folder in the backend as a static folder in the frontend
+app.use("/images",express.static(path.join(__dirname, "images"))); //allows access to the image folder in the backend as a static folder in the frontend
+app.use("/",express.static(path.join(__dirname, "angular"))); //allows access to the frontend folder
 
+// section could be removed  in case of integrated frontend
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
@@ -48,6 +50,11 @@ app.use((req, res, next) => {
 
 app.use("/api/posts", postsRoutes);
 app.use("/api/user", userRoutes);
+app.use((req,res,next) => res.sendFile(path.join(
+  __dirname,
+  "angular",
+  "index.html"
+)));
 
 // app.get('/', (req, res) => {
 //     res.send('Hello World!')
